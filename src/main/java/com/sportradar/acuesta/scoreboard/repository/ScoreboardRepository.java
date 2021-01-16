@@ -20,7 +20,7 @@ public interface ScoreboardRepository {
      * @param game The game to be added
      * @throws GameException If the game is null
      */
-    void add(Game game) throws GameException;
+    void addGame(Game game) throws GameException;
 
     /**
      * Removes a game from our repository. The game is represented by home and away
@@ -31,7 +31,7 @@ public interface ScoreboardRepository {
      * @throws ScoreboardRepositoryException If the game to be deleted is not in our
      *                                       system
      */
-    void delete(String homeTeam, String awayTeam) throws ScoreboardRepositoryException;
+    void deleteGame(String homeTeam, String awayTeam) throws ScoreboardRepositoryException;
 
     /**
      * Updates a game in our repository
@@ -41,7 +41,7 @@ public interface ScoreboardRepository {
      * @throws ScoreboardRepositoryException If the game to be updated is not in our
      *                                       system
      */
-    void update(Game game) throws GameException, ScoreboardRepositoryException;
+    void updateGame(Game game) throws GameException, ScoreboardRepositoryException;
 
     /**
      * Returns an Optional game
@@ -49,12 +49,12 @@ public interface ScoreboardRepository {
      * @param awayTeam Away team name
      * @return Optional game
      */
-    Optional<Game> find(String homeTeam, String awayTeam);
+    Optional<Game> findGame(String homeTeam, String awayTeam);
 
     /**
      * Returns all the games stored in our system
      * @return All the games stored
      */
-    List<Game> findAll();
+    List<Game> findAllGames();
 
 }

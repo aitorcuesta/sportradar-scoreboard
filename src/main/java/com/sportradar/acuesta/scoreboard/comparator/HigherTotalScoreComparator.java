@@ -8,7 +8,7 @@ import com.sportradar.acuesta.scoreboard.entity.Game;
  * @author acuesta
  *
  */
-public class TotalScoreComparator extends ChainedComparator {
+public class HigherTotalScoreComparator extends ChainedComparator {
 
     @Override
     public int compareGames(Game g1, Game g2) {

@@ -27,7 +27,7 @@ public class ScoreboardInMemoryRepository implements ScoreboardRepository {
     }
 
     @Override
-    public void add(Game game) throws GameException {
+    public void addGame(Game game) throws GameException {
 	if (null == game) {
 	    throw new GameException(GameException.GAME_CANNOT_BE_NULL);
 	}
@@ -36,28 +36,28 @@ public class ScoreboardInMemoryRepository implements ScoreboardRepository {
     }
 
     @Override
-    public void delete(String homeTeam, String awayTeam) throws ScoreboardRepositoryException {
-	find(homeTeam, awayTeam)
+    public void deleteGame(String homeTeam, String awayTeam) throws ScoreboardRepositoryException {
+	findGame(homeTeam, awayTeam)
 		.orElseThrow(() -> new ScoreboardRepositoryException(ScoreboardRepositoryException.GAME_NOT_STORED));
 	backend.remove(getId(homeTeam, awayTeam));
     }
 
     @Override
-    public void update(Game game) throws GameException, ScoreboardRepositoryException {
+    public void updateGame(Game game) throws GameException, ScoreboardRepositoryException {
 	String gameId = getId(game.getHomeTeam(), game.getAwayTeam());
-	find(game.getHomeTeam(), game.getAwayTeam())
+	findGame(game.getHomeTeam(), game.getAwayTeam())
 		.orElseThrow(() -> new ScoreboardRepositoryException(ScoreboardRepositoryException.GAME_NOT_STORED));
 	backend.put(gameId, game);
 
     }
 
     @Override
-    public Optional<Game> find(String homeTeam, String awayTeam) {
+    public Optional<Game> findGame(String homeTeam, String awayTeam) {
 	return Optional.ofNullable(backend.get(getId(homeTeam, awayTeam)));
     }
 
     @Override
-    public List<Game> findAll() {
+    public List<Game> findAllGames() {
 	return backend.values().stream().map(Game::new).collect(Collectors.toList());
     }
 

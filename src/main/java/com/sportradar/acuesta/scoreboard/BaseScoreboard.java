@@ -49,7 +49,7 @@ public class BaseScoreboard {
      * @throws GameException If any exception occurs creating or storing the game
      */
     public void startGame(String homeTeam, String awayTeam) throws GameException {
-	repository.add(new Game(homeTeam, awayTeam));
+	repository.addGame(new Game(homeTeam, awayTeam));
 
     }
 
@@ -62,7 +62,7 @@ public class BaseScoreboard {
      *                                       the game
      */
     public void finishGame(String homeTeam, String awayTeam) throws ScoreboardRepositoryException {
-	repository.delete(homeTeam, awayTeam);
+	repository.deleteGame(homeTeam, awayTeam);
 
     }
 
@@ -78,13 +78,13 @@ public class BaseScoreboard {
      * @throws GameException                 If any exception occurs while updating
      *                                       the game
      */
-    public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore)
+    public void updateGameScore(String homeTeam, String awayTeam, int homeScore, int awayScore)
 	    throws ScoreboardRepositoryException, GameException {
-	Game game = repository.find(homeTeam, awayTeam)
+	Game game = repository.findGame(homeTeam, awayTeam)
 		.orElseThrow(() -> new ScoreboardRepositoryException(ScoreboardRepositoryException.GAME_NOT_STORED));
 	game.setHomeScore(homeScore);
 	game.setAwayScore(awayScore);
-	repository.update(game);
+	repository.updateGame(game);
     }
 
     /**
@@ -94,8 +94,8 @@ public class BaseScoreboard {
      *                   {@link MostRecentlyCreatedComparator} is used by default
      * @return The summary of games
      */
-    public List<Game> getSummary(ChainedComparator comparator) {
-	return repository.findAll().stream().sorted(null != comparator ? comparator : new MostRecentlyCreatedComparator())
+    public List<Game> getGamesSummary(ChainedComparator comparator) {
+	return repository.findAllGames().stream().sorted(null != comparator ? comparator : new MostRecentlyCreatedComparator())
 		.collect(Collectors.toList());
 
     }

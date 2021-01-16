@@ -64,23 +64,23 @@ public class FootballWorldCupScoreboardTest {
 
     @Test
     public void gameCanBeStartedWithBothTeamNames() throws GameException {
-	assertEquals(0, scoreboard.getSummary(null).size());
+	assertEquals(0, scoreboard.getGamesSummary(null).size());
 	scoreboard.startGame(HOME_TEAM_1, AWAY_TEAM_1);
-	assertEquals(1, scoreboard.getSummary(null).size());
+	assertEquals(1, scoreboard.getGamesSummary(null).size());
     }
 
     @Test
     public void finishedGamesAreRemovedFromScoreboard() throws GameException, ScoreboardRepositoryException {	
 	scoreboard.startGame(HOME_TEAM_1, AWAY_TEAM_1);	
 	scoreboard.finishGame(HOME_TEAM_1, AWAY_TEAM_1);
-	assertEquals(0, scoreboard.getSummary(null).size());
+	assertEquals(0, scoreboard.getGamesSummary(null).size());
     }
 
     @Test
     public void gamesCanBeUpdated() throws GameException, ScoreboardRepositoryException {
 	scoreboard.startGame(HOME_TEAM_1, AWAY_TEAM_1);
-	scoreboard.updateScore(HOME_TEAM_1, AWAY_TEAM_1, HOME_SCORE_1, AWAY_SCORE_1);
-	Game game = scoreboard.getSummary(null).get(0);
+	scoreboard.updateGameScore(HOME_TEAM_1, AWAY_TEAM_1, HOME_SCORE_1, AWAY_SCORE_1);
+	Game game = scoreboard.getGamesSummary(null).get(0);
 	assertEquals(HOME_SCORE_1, game.getHomeScore());
 	assertEquals(AWAY_SCORE_1, game.getAwayScore());
     }
@@ -93,16 +93,16 @@ public class FootballWorldCupScoreboardTest {
 	scoreboard.startGame(GERMANY, FRANCE);
 	scoreboard.startGame(URUGUAY, ITALY);
 	scoreboard.startGame(ARGENTINA, AUSTRALIA);
-	assertEquals(5, scoreboard.getSummary(null).size());
+	assertEquals(5, scoreboard.getGamesSummary(null).size());
 
-	scoreboard.updateScore(MEXICO, CANADA, MEXICO_SCORE, CANADA_SCORE);
-	scoreboard.updateScore(SPAIN, BRAZIL, SPAIN_SCORE, BRAZIL_SCORE);
-	scoreboard.updateScore(GERMANY, FRANCE, GERMANY_SCORE, FRANCE_SCORE);
-	scoreboard.updateScore(URUGUAY, ITALY, URUGUAY_SCORE, ITALY_SCORE);
-	scoreboard.updateScore(ARGENTINA, AUSTRALIA, ARGENTINA_SCORE, AUSTRALIA_SCORE);
+	scoreboard.updateGameScore(MEXICO, CANADA, MEXICO_SCORE, CANADA_SCORE);
+	scoreboard.updateGameScore(SPAIN, BRAZIL, SPAIN_SCORE, BRAZIL_SCORE);
+	scoreboard.updateGameScore(GERMANY, FRANCE, GERMANY_SCORE, FRANCE_SCORE);
+	scoreboard.updateGameScore(URUGUAY, ITALY, URUGUAY_SCORE, ITALY_SCORE);
+	scoreboard.updateGameScore(ARGENTINA, AUSTRALIA, ARGENTINA_SCORE, AUSTRALIA_SCORE);
 
 	List<Game> summary = scoreboard.getSummaryByTotalScore();
-	assertEquals(5, scoreboard.getSummary(null).size());
+	assertEquals(5, scoreboard.getGamesSummary(null).size());
 
 	checkGameData(summary.get(0), URUGUAY, ITALY, URUGUAY_SCORE, ITALY_SCORE);
 	checkGameData(summary.get(1), SPAIN, BRAZIL, SPAIN_SCORE, BRAZIL_SCORE);

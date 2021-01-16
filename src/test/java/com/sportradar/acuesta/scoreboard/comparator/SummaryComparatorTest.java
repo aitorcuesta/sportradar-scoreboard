@@ -36,7 +36,7 @@ public class SummaryComparatorTest {
 
     @Before
     public void setUp() {
-	comparator = new TotalScoreComparator();
+	comparator = new HigherTotalScoreComparator();
 	comparator.setNext(new MostRecentlyCreatedComparator());
     }
 

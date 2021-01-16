@@ -34,22 +34,22 @@ public class ScoreboardRepositoryTest {
     @Test
     public void gamesCanBeAdded() throws GameException {
 	Game game = new Game(HOME_TEAM, AWAY_TEAM);
-	repository.add(game);	
-	assertTrue(repository.find(HOME_TEAM, AWAY_TEAM).isPresent());
+	repository.addGame(game);	
+	assertTrue(repository.findGame(HOME_TEAM, AWAY_TEAM).isPresent());
     }
 
     @Test
     public void nullGamesCannotBeAdded() throws GameException {
 	thrown.expect(GameException.class);
 	thrown.expectMessage(GameException.GAME_CANNOT_BE_NULL);
-	repository.add(null);
+	repository.addGame(null);
     }
 
     @Test
     public void addedGamesCanBeRetrieved() throws GameException {
 	Game game = new Game(HOME_TEAM, AWAY_TEAM);
-	repository.add(game);
-	Game returnedGame = repository.find(HOME_TEAM, AWAY_TEAM).get();
+	repository.addGame(game);
+	Game returnedGame = repository.findGame(HOME_TEAM, AWAY_TEAM).get();
 	assertEquals(game.getHomeTeam(), returnedGame.getHomeTeam());
 	assertEquals(game.getAwayTeam(), returnedGame.getAwayTeam());
 	assertEquals(game.getHomeScore(), returnedGame.getHomeScore());
@@ -60,9 +60,9 @@ public class ScoreboardRepositoryTest {
     @Test
     public void storedGamesCanBeDeleted() throws GameException, ScoreboardRepositoryException {
 	Game game = new Game(HOME_TEAM, AWAY_TEAM);
-	repository.add(game);
-	repository.delete(HOME_TEAM, AWAY_TEAM);
-	assertFalse(repository.find(HOME_TEAM, AWAY_TEAM).isPresent());
+	repository.addGame(game);
+	repository.deleteGame(HOME_TEAM, AWAY_TEAM);
+	assertFalse(repository.findGame(HOME_TEAM, AWAY_TEAM).isPresent());
     }
 
     @Test
@@ -70,17 +70,17 @@ public class ScoreboardRepositoryTest {
 	thrown.expect(ScoreboardRepositoryException.class);
 	thrown.expectMessage(ScoreboardRepositoryException.GAME_NOT_STORED);
 	Game game = new Game(HOME_TEAM, AWAY_TEAM);
-	repository.add(game);
-	repository.delete(OTHER_HOME_TEAM, OTHER_AWAY_TEAM);
+	repository.addGame(game);
+	repository.deleteGame(OTHER_HOME_TEAM, OTHER_AWAY_TEAM);
     }
 
     @Test
     public void storedGamesCanBeUpdated() throws GameException, ScoreboardRepositoryException {
 	Game game = new Game(HOME_TEAM, AWAY_TEAM);
-	repository.add(game);
+	repository.addGame(game);
 	game.setHomeScore(NEW_HOME_SCORE);
-	repository.update(game);
-	Game returnedGame = repository.find(HOME_TEAM, AWAY_TEAM).get();	
+	repository.updateGame(game);
+	Game returnedGame = repository.findGame(HOME_TEAM, AWAY_TEAM).get();	
 	assertEquals(NEW_HOME_SCORE, returnedGame.getHomeScore());	
     }
 
@@ -89,20 +89,20 @@ public class ScoreboardRepositoryTest {
 	thrown.expect(ScoreboardRepositoryException.class);
 	thrown.expectMessage(ScoreboardRepositoryException.GAME_NOT_STORED);
 	Game game = new Game(HOME_TEAM, AWAY_TEAM);
-	repository.add(game);
+	repository.addGame(game);
 	Game otherGame = new Game(OTHER_HOME_TEAM, OTHER_AWAY_TEAM);
-	repository.update(otherGame);
+	repository.updateGame(otherGame);
     }
 
     @Test
     public void allGamesCanBeRetrieved() throws GameException {
-	assertEquals(0, repository.findAll().size());
+	assertEquals(0, repository.findAllGames().size());
 	Game game = new Game(HOME_TEAM, AWAY_TEAM);
-	repository.add(game);
-	assertEquals(1, repository.findAll().size());
+	repository.addGame(game);
+	assertEquals(1, repository.findAllGames().size());
 	Game otherGame = new Game(OTHER_HOME_TEAM, OTHER_AWAY_TEAM);
-	repository.add(otherGame);
-	assertEquals(2, repository.findAll().size());
+	repository.addGame(otherGame);
+	assertEquals(2, repository.findAllGames().size());
     }
 
 }
