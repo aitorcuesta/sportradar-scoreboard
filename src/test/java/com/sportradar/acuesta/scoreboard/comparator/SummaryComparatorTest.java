@@ -14,7 +14,7 @@ import com.sportradar.acuesta.scoreboard.exception.GameException;
  * @author acuesta
  *
  */
-public class SummaryComparator {
+public class SummaryComparatorTest {
 
     private static final String HOME_TEAM_1 = "HOME_TEAM_1";
     private static final String HOME_TEAM_2 = "HOME_TEAM_2";
