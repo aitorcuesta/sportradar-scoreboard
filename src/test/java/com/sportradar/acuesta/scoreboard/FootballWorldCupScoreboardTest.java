@@ -70,19 +70,15 @@ public class FootballWorldCupScoreboardTest {
     }
 
     @Test
-    public void finishedGamesAreRemovedFromScoreboard() throws GameException, ScoreboardRepositoryException {
-	assertEquals(0, scoreboard.getSummary(null).size());
-	scoreboard.startGame(HOME_TEAM_1, AWAY_TEAM_1);
-	assertEquals(1, scoreboard.getSummary(null).size());
+    public void finishedGamesAreRemovedFromScoreboard() throws GameException, ScoreboardRepositoryException {	
+	scoreboard.startGame(HOME_TEAM_1, AWAY_TEAM_1);	
 	scoreboard.finishGame(HOME_TEAM_1, AWAY_TEAM_1);
 	assertEquals(0, scoreboard.getSummary(null).size());
     }
 
     @Test
     public void gamesCanBeUpdated() throws GameException, ScoreboardRepositoryException {
-	assertEquals(0, scoreboard.getSummary(null).size());
 	scoreboard.startGame(HOME_TEAM_1, AWAY_TEAM_1);
-	assertEquals(1, scoreboard.getSummary(null).size());
 	scoreboard.updateScore(HOME_TEAM_1, AWAY_TEAM_1, HOME_SCORE_1, AWAY_SCORE_1);
 	Game game = scoreboard.getSummary(null).get(0);
 	assertEquals(HOME_SCORE_1, game.getHomeScore());
@@ -91,8 +87,7 @@ public class FootballWorldCupScoreboardTest {
 
     @Test
     public void gamesSummaryIsSortedByTotalScoreAndMostRecentlyAdded()
-	    throws GameException, ScoreboardRepositoryException {
-	assertEquals(0, scoreboard.getSummary(null).size());
+	    throws GameException, ScoreboardRepositoryException {	
 	scoreboard.startGame(MEXICO, CANADA);
 	scoreboard.startGame(SPAIN, BRAZIL);
 	scoreboard.startGame(GERMANY, FRANCE);
