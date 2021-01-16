@@ -37,7 +37,7 @@ public class SummaryComparatorTest {
     @Before
     public void setUp() {
 	comparator = new TotalScoreComparator();
-	comparator.setNext(new CreationTimeComparator());
+	comparator.setNext(new MostRecentlyCreatedComparator());
     }
 
     @Test
@@ -63,7 +63,7 @@ public class SummaryComparatorTest {
 	game3.setHomeScore(HOME_SCORE_3);
 	game3.setAwayScore(AWAY_SCORE_3);
 	
-	assertTrue(comparator.compare(game2, game2) < 0);
+	assertTrue(comparator.compare(game2, game3) < 0);
 		
     }
 
