@@ -61,6 +61,19 @@ public class Game {
     }
 
     /**
+     * Copy constructor. Only for cloning games
+     * 
+     * @param game The game to be cloned
+     */
+    public Game(Game game) {
+	this.homeTeam = game.homeTeam;
+	this.awayTeam = game.awayTeam;
+	this.homeScore = game.awayScore;
+	this.awayScore = game.awayScore;
+	this.creationTime = game.creationTime;
+    }
+
+    /**
      * Returns the home team name
      * 
      * @return Home team name
@@ -123,9 +136,10 @@ public class Game {
     public long getCreationTime() {
 	return creationTime;
     }
-    
+
     /**
      * Returns the total score for both teams
+     * 
      * @return Total score
      */
     public int getTotalScore() {
