@@ -14,10 +14,18 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>        
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <junit.version>4.13</junit.version>        
+        <commons-lang.version>3.5</commons-lang.version>
+        <junit.version>4.12</junit.version>        
     </properties>
 
     <dependencies>
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang.version}</version>
+        </dependency>
+    
 
         <dependency>
             <groupId>junit</groupId>
