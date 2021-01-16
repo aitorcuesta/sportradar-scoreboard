@@ -1,7 +1,6 @@
 package com.sportradar.acuesta.scoreboard;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -21,10 +20,7 @@ import com.sportradar.acuesta.scoreboard.exception.ScoreboardRepositoryException
 public class FootballWorldCupScoreboardTest {
 
     private static final String HOME_TEAM_1 = "HOME_TEAM_1";
-    private static final String HOME_TEAM_2 = "HOME_TEAM_2";
-
     private static final String AWAY_TEAM_1 = "AWAY_TEAM_1";
-    private static final String AWAY_TEAM_2 = "AWAY_TEAM_2";
 
     private static final int HOME_SCORE_1 = 1;
     private static final int AWAY_SCORE_1 = 0;
@@ -94,7 +90,8 @@ public class FootballWorldCupScoreboardTest {
     }
 
     @Test
-    public void gamesSummaryIsSortedByTotalScoreAndMostRecentlyAdded() throws GameException, ScoreboardRepositoryException {
+    public void gamesSummaryIsSortedByTotalScoreAndMostRecentlyAdded()
+	    throws GameException, ScoreboardRepositoryException {
 	assertEquals(0, scoreboard.getSummary(null).size());
 	scoreboard.startGame(MEXICO, CANADA);
 	scoreboard.startGame(SPAIN, BRAZIL);
@@ -108,54 +105,23 @@ public class FootballWorldCupScoreboardTest {
 	scoreboard.updateScore(GERMANY, FRANCE, GERMANY_SCORE, FRANCE_SCORE);
 	scoreboard.updateScore(URUGUAY, ITALY, URUGUAY_SCORE, ITALY_SCORE);
 	scoreboard.updateScore(ARGENTINA, AUSTRALIA, ARGENTINA_SCORE, AUSTRALIA_SCORE);
-	
+
 	List<Game> summary = scoreboard.getSummaryByTotalScore();
 	assertEquals(5, scoreboard.getSummary(null).size());
-	
-	/*
-	 * Order should be:
-	 * 0 - URUGUAY - ITALY
-	 * 1 - SPAIN - BRAZIL
-	 * 2 - MEXICO - CANADA
-	 * 3 - ARGENTINA - AUSTRALIA
-	 * 4 - GERMANY - FRANCE
-	 */
-	
-	// URUGUAY - ITALY
-	Game game = summary.get(0);
-	assertEquals(URUGUAY, game.getHomeTeam());
-	assertEquals(ITALY, game.getAwayTeam());
-	assertEquals(URUGUAY_SCORE, game.getHomeScore());
-	assertEquals(ITALY_SCORE, game.getAwayScore());
-	
-	// SPAIN - BRAZIL
-	game = summary.get(1);
-	assertEquals(SPAIN, game.getHomeTeam());
-	assertEquals(BRAZIL, game.getAwayTeam());
-	assertEquals(SPAIN_SCORE, game.getHomeScore());
-	assertEquals(BRAZIL_SCORE, game.getAwayScore());
-	
-	// MEXICO - CANADA
-	game = summary.get(2);
-	assertEquals(MEXICO, game.getHomeTeam());
-	assertEquals(CANADA, game.getAwayTeam());
-	assertEquals(MEXICO_SCORE, game.getHomeScore());
-	assertEquals(CANADA_SCORE, game.getAwayScore());
-	
-	// ARGENTINA - AUSTRALIA
-	game = summary.get(3);
-	assertEquals(ARGENTINA, game.getHomeTeam());
-	assertEquals(AUSTRALIA, game.getAwayTeam());
-	assertEquals(ARGENTINA_SCORE, game.getHomeScore());
-	assertEquals(AUSTRALIA_SCORE, game.getAwayScore());
-	
-	// GERMANY - FRANCE
-	game = summary.get(4);
-	assertEquals(GERMANY, game.getHomeTeam());
-	assertEquals(FRANCE, game.getAwayTeam());
-	assertEquals(GERMANY_SCORE, game.getHomeScore());
-	assertEquals(FRANCE_SCORE, game.getAwayScore());
-	
+
+	checkGameData(summary.get(0), URUGUAY, ITALY, URUGUAY_SCORE, ITALY_SCORE);
+	checkGameData(summary.get(1), SPAIN, BRAZIL, SPAIN_SCORE, BRAZIL_SCORE);
+	checkGameData(summary.get(2), MEXICO, CANADA, MEXICO_SCORE, CANADA_SCORE);
+	checkGameData(summary.get(3), ARGENTINA, AUSTRALIA, ARGENTINA_SCORE, AUSTRALIA_SCORE);
+	checkGameData(summary.get(4), GERMANY, FRANCE, GERMANY_SCORE, FRANCE_SCORE);
+
+    }
+
+    private void checkGameData(Game game, String homeTeam, String awayTeam, int homeScore, int awayScore) {
+	assertEquals(homeTeam, game.getHomeTeam());
+	assertEquals(awayTeam, game.getAwayTeam());
+	assertEquals(homeScore, game.getHomeScore());
+	assertEquals(awayScore, game.getAwayScore());
     }
 
 }

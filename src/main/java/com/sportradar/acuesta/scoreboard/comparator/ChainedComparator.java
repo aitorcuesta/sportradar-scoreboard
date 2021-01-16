@@ -37,7 +37,7 @@ public abstract class ChainedComparator implements Comparator<Game> {
 
     @Override
     public int compare(Game g1, Game g2) {
-	int comparation = compareMatches(g1, g2);
+	int comparation = compareGames(g1, g2);
 	return 0 == comparation && null != next ? next.compare(g1, g2) : comparation;
     }
 
@@ -49,6 +49,6 @@ public abstract class ChainedComparator implements Comparator<Game> {
      * @return Returns a negative integer,zero, or a positive integer as the first
      *         argument is less than, equalto, or greater than the second
      */
-    protected abstract int compareMatches(Game g1, Game g2);
+    protected abstract int compareGames(Game g1, Game g2);
 
 }

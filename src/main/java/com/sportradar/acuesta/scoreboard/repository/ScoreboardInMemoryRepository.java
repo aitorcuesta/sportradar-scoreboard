@@ -10,8 +10,14 @@ import com.sportradar.acuesta.scoreboard.entity.Game;
 import com.sportradar.acuesta.scoreboard.exception.GameException;
 import com.sportradar.acuesta.scoreboard.exception.ScoreboardRepositoryException;
 
+/**
+ * Basic in-memory implementation for storing games
+ * @author acuesta
+ *
+ */
 public class ScoreboardInMemoryRepository implements ScoreboardRepository {
 
+    private static final String DASH = "-";
     private Map<String, Game> backend;
 
     public ScoreboardInMemoryRepository() {
@@ -54,7 +60,7 @@ public class ScoreboardInMemoryRepository implements ScoreboardRepository {
     }
 
     private String getId(String homeTeam, String awayTeam) {
-	return String.join("-", homeTeam, awayTeam);
+	return String.join(DASH, homeTeam, awayTeam);
     }
 
 }

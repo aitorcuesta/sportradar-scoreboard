@@ -1,5 +1,10 @@
 package com.sportradar.acuesta.scoreboard.exception;
 
+/**
+ * Exception for scoreboard repository
+ * @author acuesta
+ *
+ */
 public class ScoreboardRepositoryException extends Exception{
     
     public static final String GAME_NOT_STORED = "The game is not stored in our system";

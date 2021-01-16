@@ -7,6 +7,11 @@ import com.sportradar.acuesta.scoreboard.entity.Game;
 import com.sportradar.acuesta.scoreboard.exception.GameException;
 import com.sportradar.acuesta.scoreboard.exception.ScoreboardRepositoryException;
 
+/**
+ * Interface that defines a repository for storing games in our scoreboard
+ * @author acuesta
+ *
+ */
 public interface ScoreboardRepository {
 
     /**

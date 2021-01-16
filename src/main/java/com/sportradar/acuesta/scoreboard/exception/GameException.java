@@ -1,5 +1,10 @@
 package com.sportradar.acuesta.scoreboard.exception;
 
+/**
+ * Exception for games
+ * @author acuesta
+ *
+ */
 public class GameException extends Exception {
     
     public static final String HOME_TEAM_NAME_MANDATORY = "Home team must be a valid name";

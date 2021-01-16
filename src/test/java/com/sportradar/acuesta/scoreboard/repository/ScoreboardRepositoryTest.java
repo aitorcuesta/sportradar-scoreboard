@@ -45,6 +45,7 @@ public class ScoreboardRepositoryTest {
 	repository.add(null);
     }
 
+    @Test
     public void addedGamesCanBeRetrieved() throws GameException {
 	Game game = new Game(HOME_TEAM, AWAY_TEAM);
 	repository.add(game);
