@@ -10,7 +10,7 @@ import com.sportradar.acuesta.scoreboard.exception.GameException;
  * @author acuesta
  *
  */
-public class Game {
+public class Game implements Cloneable{
 
     /**
      * Home team name
@@ -58,20 +58,7 @@ public class Game {
 	this.homeScore = 0;
 	this.awayScore = 0;
 	this.creationTime = System.nanoTime();
-    }
-
-    /**
-     * Copy constructor. Only for cloning games
-     * 
-     * @param game The game to be cloned
-     */
-    public Game(Game game) {
-	this.homeTeam = game.homeTeam;
-	this.awayTeam = game.awayTeam;
-	this.homeScore = game.awayScore;
-	this.awayScore = game.awayScore;
-	this.creationTime = game.creationTime;
-    }
+    }    
 
     /**
      * Returns the home team name
@@ -145,5 +132,5 @@ public class Game {
     public int getTotalScore() {
 	return this.homeScore + this.awayScore;
     }
-
+    
 }

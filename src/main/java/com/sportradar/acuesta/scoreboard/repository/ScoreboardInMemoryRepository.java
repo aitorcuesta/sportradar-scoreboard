@@ -1,10 +1,10 @@
 package com.sportradar.acuesta.scoreboard.repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.sportradar.acuesta.scoreboard.entity.Game;
 import com.sportradar.acuesta.scoreboard.exception.GameException;
@@ -50,7 +50,7 @@ public class ScoreboardInMemoryRepository implements ScoreboardRepository {
 
     @Override
     public List<Game> findAll() {	
-	return backend.values().stream().map(Game::new).collect(Collectors.toList());
+	return new ArrayList<Game>(backend.values());
     }
 
     private String getId(String homeTeam, String awayTeam) {
