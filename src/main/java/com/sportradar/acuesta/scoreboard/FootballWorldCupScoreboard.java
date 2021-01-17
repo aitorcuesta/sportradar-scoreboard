@@ -3,8 +3,8 @@ package com.sportradar.acuesta.scoreboard;
 import java.util.List;
 
 import com.sportradar.acuesta.scoreboard.comparator.ChainedComparator;
-import com.sportradar.acuesta.scoreboard.comparator.TotalScoreComparator;
 import com.sportradar.acuesta.scoreboard.comparator.CreationTimeComparator;
+import com.sportradar.acuesta.scoreboard.comparator.TotalScoreComparator;
 import com.sportradar.acuesta.scoreboard.entity.Game;
 import com.sportradar.acuesta.scoreboard.repository.ScoreboardRepository;
 
@@ -49,8 +49,7 @@ public class FootballWorldCupScoreboard extends BaseScoreboard {
 
     private void initalizeComparators() {
 	summaryByTotalScore = new TotalScoreComparator(TotalScoreComparator.SortingType.HIGHER_FIRST);
-	summaryByTotalScore.setNext(
-		new CreationTimeComparator(CreationTimeComparator.SortingType.NEWER_FIRST));
+	summaryByTotalScore.setNext(new CreationTimeComparator(CreationTimeComparator.SortingType.NEWER_FIRST));
     }
 
 }

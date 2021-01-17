@@ -9,11 +9,13 @@ import com.sportradar.acuesta.scoreboard.entity.Game;
  *
  */
 public class TotalScoreComparator extends ChainedComparator {
-    
-    public enum SortingType {HIGHER_FIRST, LOWER_FIRST};
-    
+
+    public enum SortingType {
+	HIGHER_FIRST, LOWER_FIRST
+    };
+
     private SortingType sortingType;
-    
+
     public TotalScoreComparator(SortingType sortingType) {
 	this.sortingType = sortingType;
     }

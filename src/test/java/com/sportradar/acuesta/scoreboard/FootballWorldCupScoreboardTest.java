@@ -70,8 +70,8 @@ public class FootballWorldCupScoreboardTest {
     }
 
     @Test
-    public void finishedGamesAreRemovedFromScoreboard() throws GameException, ScoreboardRepositoryException {	
-	scoreboard.startGame(HOME_TEAM_1, AWAY_TEAM_1);	
+    public void finishedGamesAreRemovedFromScoreboard() throws GameException, ScoreboardRepositoryException {
+	scoreboard.startGame(HOME_TEAM_1, AWAY_TEAM_1);
 	scoreboard.finishGame(HOME_TEAM_1, AWAY_TEAM_1);
 	assertEquals(0, scoreboard.getGamesSummary(null).size());
     }
@@ -87,7 +87,7 @@ public class FootballWorldCupScoreboardTest {
 
     @Test
     public void gamesSummaryIsSortedByTotalScoreAndMostRecentlyAdded()
-	    throws GameException, ScoreboardRepositoryException {	
+	    throws GameException, ScoreboardRepositoryException {
 	scoreboard.startGame(MEXICO, CANADA);
 	scoreboard.startGame(SPAIN, BRAZIL);
 	scoreboard.startGame(GERMANY, FRANCE);

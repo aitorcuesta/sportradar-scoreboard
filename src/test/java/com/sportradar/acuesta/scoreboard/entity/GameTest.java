@@ -59,7 +59,7 @@ public class GameTest {
     @Test
     public void gamesHaveCreationTime() throws GameException {
 	Game game = new Game(HOME_TEAM, AWAY_TEAM);
-	assertTrue(game.getCreationTime() > 0);	
+	assertTrue(game.getCreationTime() > 0);
     }
 
 }

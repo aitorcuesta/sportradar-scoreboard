@@ -1,7 +1,6 @@
 package com.sportradar.acuesta.scoreboard;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.sportradar.acuesta.scoreboard.comparator.ChainedComparator;
@@ -97,8 +96,7 @@ public class BaseScoreboard {
     public List<Game> getGamesSummary(ChainedComparator comparator) {
 	return repository.findAllGames().stream()
 		.sorted(null != comparator ? comparator
-			: new CreationTimeComparator(
-				CreationTimeComparator.SortingType.NEWER_FIRST))
+			: new CreationTimeComparator(CreationTimeComparator.SortingType.NEWER_FIRST))
 		.collect(Collectors.toList());
 
     }

@@ -14,18 +14,18 @@ import com.sportradar.acuesta.scoreboard.exception.GameException;
 import com.sportradar.acuesta.scoreboard.exception.ScoreboardRepositoryException;
 
 public class ScoreboardRepositoryTest {
-    
+
     private static final String HOME_TEAM = "HOME_TEAM";
     private static final String AWAY_TEAM = "AWAY_TEAM";
     private static final String OTHER_HOME_TEAM = "OTHER_HOME_TEAM";
     private static final String OTHER_AWAY_TEAM = "OTHER_AWAY_TEAM";
     private static final int NEW_HOME_SCORE = 2;
-    
-    private ScoreboardRepository repository;        
-    
+
+    private ScoreboardRepository repository;
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    
+
     @Before
     public void setUp() {
 	repository = new ScoreboardInMemoryRepository();
@@ -34,7 +34,7 @@ public class ScoreboardRepositoryTest {
     @Test
     public void gamesCanBeAdded() throws GameException {
 	Game game = new Game(HOME_TEAM, AWAY_TEAM);
-	repository.addGame(game);	
+	repository.addGame(game);
 	assertTrue(repository.findGame(HOME_TEAM, AWAY_TEAM).isPresent());
     }
 
@@ -80,8 +80,8 @@ public class ScoreboardRepositoryTest {
 	repository.addGame(game);
 	game.setHomeScore(NEW_HOME_SCORE);
 	repository.updateGame(game);
-	Game returnedGame = repository.findGame(HOME_TEAM, AWAY_TEAM).get();	
-	assertEquals(NEW_HOME_SCORE, returnedGame.getHomeScore());	
+	Game returnedGame = repository.findGame(HOME_TEAM, AWAY_TEAM).get();
+	assertEquals(NEW_HOME_SCORE, returnedGame.getHomeScore());
     }
 
     @Test

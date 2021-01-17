@@ -9,6 +9,7 @@ import com.sportradar.acuesta.scoreboard.exception.ScoreboardRepositoryException
 
 /**
  * Interface that defines a repository for storing games in our scoreboard
+ * 
  * @author acuesta
  *
  */
@@ -45,6 +46,7 @@ public interface ScoreboardRepository {
 
     /**
      * Returns an Optional game
+     * 
      * @param homeTeam Home team name
      * @param awayTeam Away team name
      * @return Optional game
@@ -53,6 +55,7 @@ public interface ScoreboardRepository {
 
     /**
      * Returns all the games stored in our system
+     * 
      * @return All the games stored
      */
     List<Game> findAllGames();

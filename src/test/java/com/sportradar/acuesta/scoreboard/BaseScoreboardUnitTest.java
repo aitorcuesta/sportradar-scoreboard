@@ -3,7 +3,12 @@ package com.sportradar.acuesta.scoreboard;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
@@ -59,7 +64,7 @@ public class BaseScoreboardUnitTest {
 	checkEqualityTeamNames(game, HOME_TEAM, AWAY_TEAM);
 	checkEqualityTeamScores(game, 0, 0);
 	assertTrue(game.getCreationTime() > 0);
-    }    
+    }
 
     @Test
     public void whenInvokingStartGameAndRepositoryThrowsExceptionExceptionIsPropagated() throws GameException {
@@ -98,7 +103,7 @@ public class BaseScoreboardUnitTest {
 	verify(repository, times(1)).updateGame(gameCaptor.capture());
 	Game game = gameCaptor.getValue();
 	checkEqualityTeamNames(game, HOME_TEAM, AWAY_TEAM);
-	checkEqualityTeamScores(game, HOME_TEAM_SCORE, AWAY_TEAM_SCORE);	
+	checkEqualityTeamScores(game, HOME_TEAM_SCORE, AWAY_TEAM_SCORE);
 
     }
 
@@ -119,7 +124,7 @@ public class BaseScoreboardUnitTest {
 	thrown.expect(ScoreboardRepositoryException.class);
 	when(repository.findGame(HOME_TEAM, AWAY_TEAM)).thenReturn(Optional.of(new Game(HOME_TEAM, AWAY_TEAM)));
 	doThrow(ScoreboardRepositoryException.class).when(repository).updateGame(any(Game.class));
-	scoreboard.updateGameScore(HOME_TEAM, AWAY_TEAM, HOME_TEAM_SCORE, AWAY_TEAM_SCORE);	
+	scoreboard.updateGameScore(HOME_TEAM, AWAY_TEAM, HOME_TEAM_SCORE, AWAY_TEAM_SCORE);
 
 	verify(repository, times(1)).updateGame(gameCaptor.capture());
 
@@ -130,13 +135,13 @@ public class BaseScoreboardUnitTest {
 	scoreboard.getGamesSummary(null);
 	verify(repository, times(1)).findAllGames();
     }
-    
+
     private void checkEqualityTeamNames(Game game, String expectedHomeName, String expectedAwayName) {
 	assertNotNull(game);
 	assertEquals(expectedHomeName, game.getHomeTeam());
 	assertEquals(expectedAwayName, game.getAwayTeam());
     }
-    
+
     private void checkEqualityTeamScores(Game game, int expectedHomeScore, int expectedAwayScore) {
 	assertNotNull(game);
 	assertEquals(expectedHomeScore, game.getHomeScore());
