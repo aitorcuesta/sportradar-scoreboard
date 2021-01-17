@@ -36,8 +36,9 @@ public class SummaryComparatorTest {
 
     @Before
     public void setUp() {
-	comparator = new HigherTotalScoreComparator();
-	comparator.setNext(new MostRecentlyCreatedComparator());
+	comparator = new TotalScoreComparator(TotalScoreComparator.SortingType.HIGHER_FIRST);
+	comparator.setNext(
+		new CreationTimeComparator(CreationTimeComparator.SortingType.MOST_RECENTLY_FIRST));
     }
 
     @Test
@@ -58,13 +59,13 @@ public class SummaryComparatorTest {
 	Game game2 = new Game(HOME_TEAM_2, AWAY_TEAM_2);
 	game2.setHomeScore(HOME_SCORE_2);
 	game2.setAwayScore(AWAY_SCORE_2);
-	
+
 	Game game3 = new Game(HOME_TEAM_3, AWAY_TEAM_3);
 	game3.setHomeScore(HOME_SCORE_3);
 	game3.setAwayScore(AWAY_SCORE_3);
-	
+
 	assertTrue(comparator.compare(game2, game3) < 0);
-		
+
     }
 
 }

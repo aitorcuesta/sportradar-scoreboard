@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.sportradar.acuesta.scoreboard.comparator.ChainedComparator;
-import com.sportradar.acuesta.scoreboard.comparator.MostRecentlyCreatedComparator;
+import com.sportradar.acuesta.scoreboard.comparator.CreationTimeComparator;
 import com.sportradar.acuesta.scoreboard.entity.Game;
 import com.sportradar.acuesta.scoreboard.exception.GameException;
 import com.sportradar.acuesta.scoreboard.exception.ScoreboardRepositoryException;
@@ -91,11 +91,14 @@ public class BaseScoreboard {
      * Returns all the games stored in our scoreboard
      * 
      * @param comparator The comparator for sorting the result.
-     *                   {@link MostRecentlyCreatedComparator} is used by default
+     *                   {@link CreationTimeComparator} is used by default
      * @return The summary of games
      */
     public List<Game> getGamesSummary(ChainedComparator comparator) {
-	return repository.findAllGames().stream().sorted(null != comparator ? comparator : new MostRecentlyCreatedComparator())
+	return repository.findAllGames().stream()
+		.sorted(null != comparator ? comparator
+			: new CreationTimeComparator(
+				CreationTimeComparator.SortingType.MOST_RECENTLY_FIRST))
 		.collect(Collectors.toList());
 
     }

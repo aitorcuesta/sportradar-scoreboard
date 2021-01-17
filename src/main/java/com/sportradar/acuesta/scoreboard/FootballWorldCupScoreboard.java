@@ -3,8 +3,8 @@ package com.sportradar.acuesta.scoreboard;
 import java.util.List;
 
 import com.sportradar.acuesta.scoreboard.comparator.ChainedComparator;
-import com.sportradar.acuesta.scoreboard.comparator.MostRecentlyCreatedComparator;
-import com.sportradar.acuesta.scoreboard.comparator.HigherTotalScoreComparator;
+import com.sportradar.acuesta.scoreboard.comparator.TotalScoreComparator;
+import com.sportradar.acuesta.scoreboard.comparator.CreationTimeComparator;
 import com.sportradar.acuesta.scoreboard.entity.Game;
 import com.sportradar.acuesta.scoreboard.repository.ScoreboardRepository;
 
@@ -15,7 +15,7 @@ import com.sportradar.acuesta.scoreboard.repository.ScoreboardRepository;
  *
  */
 public class FootballWorldCupScoreboard extends BaseScoreboard {
-    
+
     private ChainedComparator summaryByTotalScore;
 
     /**
@@ -43,14 +43,14 @@ public class FootballWorldCupScoreboard extends BaseScoreboard {
      * 
      * @return
      */
-    public List<Game> getSummaryByTotalScore() {	
+    public List<Game> getSummaryByTotalScore() {
 	return this.getGamesSummary(summaryByTotalScore);
     }
-    
-        
+
     private void initalizeComparators() {
-	summaryByTotalScore = new HigherTotalScoreComparator();
-	summaryByTotalScore.setNext(new MostRecentlyCreatedComparator());
+	summaryByTotalScore = new TotalScoreComparator(TotalScoreComparator.SortingType.HIGHER_FIRST);
+	summaryByTotalScore.setNext(
+		new CreationTimeComparator(CreationTimeComparator.SortingType.MOST_RECENTLY_FIRST));
     }
 
 }
