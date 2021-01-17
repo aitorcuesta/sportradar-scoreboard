@@ -11,7 +11,7 @@ import com.sportradar.acuesta.scoreboard.entity.Game;
  */
 public class CreationTimeComparator extends ChainedComparator {
     
-    public enum SortingType {LEAST_RECENTLY_FIRST, MOST_RECENTLY_FIRST};
+    public enum SortingType {NEWER_FIRST, OLDER_FIRST};
     
     private SortingType sortingType;
     
@@ -22,7 +22,7 @@ public class CreationTimeComparator extends ChainedComparator {
     @Override
     protected int compareGames(Game g1, Game g2) {
 	int comparingResult = (int) (g1.getCreationTime() - g2.getCreationTime()); 
-	return sortingType == SortingType.LEAST_RECENTLY_FIRST ? comparingResult : comparingResult * -1;
+	return sortingType == SortingType.OLDER_FIRST ? comparingResult : comparingResult * -1;
     }
 
 }

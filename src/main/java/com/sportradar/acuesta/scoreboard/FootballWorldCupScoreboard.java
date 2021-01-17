@@ -50,7 +50,7 @@ public class FootballWorldCupScoreboard extends BaseScoreboard {
     private void initalizeComparators() {
 	summaryByTotalScore = new TotalScoreComparator(TotalScoreComparator.SortingType.HIGHER_FIRST);
 	summaryByTotalScore.setNext(
-		new CreationTimeComparator(CreationTimeComparator.SortingType.MOST_RECENTLY_FIRST));
+		new CreationTimeComparator(CreationTimeComparator.SortingType.NEWER_FIRST));
     }
 
 }

@@ -98,7 +98,7 @@ public class BaseScoreboard {
 	return repository.findAllGames().stream()
 		.sorted(null != comparator ? comparator
 			: new CreationTimeComparator(
-				CreationTimeComparator.SortingType.MOST_RECENTLY_FIRST))
+				CreationTimeComparator.SortingType.NEWER_FIRST))
 		.collect(Collectors.toList());
 
     }

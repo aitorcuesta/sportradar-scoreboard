@@ -38,7 +38,7 @@ public class SummaryComparatorTest {
     public void setUp() {
 	comparator = new TotalScoreComparator(TotalScoreComparator.SortingType.HIGHER_FIRST);
 	comparator.setNext(
-		new CreationTimeComparator(CreationTimeComparator.SortingType.MOST_RECENTLY_FIRST));
+		new CreationTimeComparator(CreationTimeComparator.SortingType.NEWER_FIRST));
     }
 
     @Test
